@@ -3,7 +3,7 @@ from controller import my_bp
 from sanic import Sanic, response
 from sanic.log import logger
 
-app = Sanic("My First Sanic App")
+app = Sanic("My First Sanic App Oh God")
 
 # registering route defined by blueprint
 app.blueprint(my_bp)
