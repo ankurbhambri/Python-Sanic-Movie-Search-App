@@ -1,1 +1,1 @@
-web: python run.py
+web: gunicorn main:app --worker-class sanic.worker.GunicornWorker --log-file -
