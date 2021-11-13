@@ -1,0 +1,16 @@
+aiofiles==0.7.0
+black==21.10b0
+click==8.0.3
+httptools==0.3.0
+multidict==5.2.0
+mypy-extensions==0.4.3
+pathspec==0.9.0
+platformdirs==2.4.0
+regex==2021.11.10
+sanic==21.9.1
+sanic-routing==0.7.2
+tomli==1.2.2
+typing-extensions==3.10.0.2
+ujson==4.2.0
+uvloop==0.16.0
+websockets==10.0
