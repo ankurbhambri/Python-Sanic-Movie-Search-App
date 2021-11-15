@@ -1,0 +1,24 @@
+-- TABLE Movie
+CREATE TABLE Movie (
+MovieID varchar(10) NOT NULL PRIMARY KEY,
+MovieTitle varchar (30) NOT NULL,
+Popularity float NOT NULL,
+ImdbScore float NOT NULL,
+ReleaseDate DATE NOT NULL,
+fk_Genre integer REFERENCES Genre(GenreID),
+fk_Director integer REFERENCES Director(DirectorID)
+);
+
+
+-- TABLE Genre;
+CREATE TABLE Genre(
+GenreID varchar(10) NOT NULL PRIMARY KEY,
+GenreType varchar(30) NOT NULL
+);
+
+-- TABLE Director;
+CREATE TABLE Director(
+DirectorID varchar(10) NOT NULL PRIMARY KEY,
+DirectorName varchar(30) NOT NULL,
+DirectoryNationality varchar(30) NOT NULL
+);
