@@ -8,10 +8,9 @@ heroku ps:scale web=1 --app fynd-intv
 # Deployment link
 https://fynd-intv.herokuapp.com/
 
-**RESTful API that tracks jogging times of users**
+**RESTful API that add users and movies**
 ### Project Structure & Setup
 
-```
 - Models/ 
    ("models": objects, functions which connect to database, 
     function as data abstraction layer)
