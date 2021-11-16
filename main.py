@@ -1,8 +1,6 @@
 from aredis import StrictRedis
 from environs import Env
-
-# from sanic import Sanic, response
-# from sanic.log import logger
+from sanic import response
 from sanic_jwt import Initialize
 from tortoise.contrib.sanic import register_tortoise
 
@@ -35,6 +33,12 @@ Initialize(
     refresh_token_enabled=True,
 )
 
+# webapp path defined used route decorator
+@app.route("/")
+def run(request):
+    return response.text("Welcome :)")
+
+
 # user routes
 app.add_route(register, "/register", methods=["POST"])
 app.add_route(delete_user, "/users/<user_id>", methods=["DELETE"])
@@ -47,6 +51,7 @@ app.add_route(
 )
 app.add_route(add_movies, "/add_movies", methods=["POST"])
 app.add_route(update_movies, "/update_movies", methods=["POST"])
+
 
 register_tortoise(
     app,
