@@ -1,6 +1,5 @@
 # Url
 https://fynd-intv.herokuapp.com/
-
 # Logs
 heroku logs --tail --app fynd-intv
 # To scale heroku instance
@@ -95,20 +94,39 @@ Prerequisites:
         "email: "Test@test.com"
     }
     ```
-    ```response
-    {
-        "user updated successfuly 201 status code"
-    }
-    ```
 * DELETE `/users/<user_id>` deactivate user information (only for admin role with token authentication).
-
-    ```response
-    {
-        "user deactivated successfuly 201 status code"
-    }
-    ```
 #### CURD /Movies : Authentication required
 
+* Movies API with authentication and endpoints
 
+* POST `/upload` to upload movies data through file (only for admin role with token authentication)
+    ```request
+    {
+        file upload
+    }
+    ```
+* POST `/search_movies_id/<movie_id>` search movie (only for admin role with token authentication).
+* POST `/add_movies` addm movies (only for admin role with token authentication).
+    ```request
+    {
+        "movie_name": "Test movie",
+        "popularity": 9,
+        "imdbScore": 8.3,
+        "genre": ["Action"],
+        "director": "Test"
+    }
+* POST `/update_movies` update movies (only for admin role with token authentication).
+    ```request
+    {
+        "id": 109,
+        "movie_name": "Test movie changed",
+        "popularity": 9,
+        "imdbScore": 8.3,
+        "genre": ["Action"],
+        "director": "Test"
+    }
+#### Database Login Creds
 
+* email nadivo1208@elastit.com
+* pass Redmi@007
 
