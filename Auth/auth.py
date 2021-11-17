@@ -1,11 +1,10 @@
 import bcrypt
 import jwt
+from config import app
+from models import Token, Users
 
 # from sanic import response
 from sanic_jwt import Claim, exceptions
-
-from config import app
-from models import Token, Users
 
 
 def encrypt(password):

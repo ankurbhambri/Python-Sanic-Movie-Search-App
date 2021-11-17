@@ -4,7 +4,7 @@ from sanic import response
 from sanic_jwt import Initialize
 from tortoise.contrib.sanic import register_tortoise
 
-from auth import (
+from Auth.auth import (
     EmailClaim,
     NameClaim,
     authenticate,
@@ -13,8 +13,13 @@ from auth import (
     store_refresh_token,
 )
 from config import app
-from movies import add_movies, search_movies_id, update_movies, upload_movies
-from users import delete_user, register, update_user
+from Routes.movies import (
+    add_movies,
+    search_movies_id,
+    update_movies,
+    upload_movies,
+)
+from Routes.users import delete_user, register, update_user
 
 env = Env()
 env.read_env()

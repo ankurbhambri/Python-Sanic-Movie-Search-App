@@ -1,9 +1,8 @@
+from Auth.auth import encrypt, password_validator, retrieve_user
+from models import Users
 from sanic import response
 from sanic.exceptions import InvalidUsage, SanicException
 from sanic_jwt.decorators import protected
-
-from auth import encrypt, password_validator, retrieve_user
-from models import Users
 
 
 async def register(request, *args, **kwargs):

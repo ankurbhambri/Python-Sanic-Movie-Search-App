@@ -2,18 +2,16 @@ import ast
 import os
 
 import aiofiles
+from Auth.auth import retrieve_user
+from main import app
+from models import Movie, Users
 from sanic import response
 from sanic.exceptions import InvalidUsage, SanicException
 from sanic_jwt.decorators import protected
-
-from auth import retrieve_user
-from main import app
-from models import Movie, Users
-from utils import try_or, user_isAdmin
+from Utils.utils import try_or, user_isAdmin
 
 
-# One time activity
-# @protected()
+# One time activity Api
 async def upload_movies(request):
 
     dd = request.files["file"][0].body
@@ -31,7 +29,6 @@ async def upload_movies(request):
     return response.json({'data': data})
 
 
-# @protected()
 async def search_movies_id(request, *args, **kwargs):
 
     movie_id = try_or(lambda: int(request.path.split("/")[2]), None)
