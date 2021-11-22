@@ -1,4 +1,4 @@
-from Auth.auth import encrypt, password_validator, retrieve_user
+from authentication.auth import encrypt, password_validator, retrieve_user
 from models import Users
 from sanic import response
 from sanic.exceptions import InvalidUsage, SanicException
@@ -20,7 +20,7 @@ async def register(request, *args, **kwargs):
     is_admin = request.json.get('is_admin', False)
 
     if await Users.exists(username=username):
-        raise InvalidUsage("username already exists")
+        raise response.HTTPResponse(status=401)
 
     user = await Users.create(
         name=name,
@@ -28,7 +28,6 @@ async def register(request, *args, **kwargs):
         password=encrypt(request.json["password"]),
         is_admin=is_admin,
     )
-    # return response.HTTPResponse(status=201)
     return response.json({"User created successfuly": str(user)})
 
 
@@ -47,7 +46,7 @@ async def update_user(request, *args, **kwargs):
     is_active = request.json.get("is_active", user.is_active)
 
     if not user.id != token_user_id:
-        raise InvalidUsage("This is not your profile !!")
+        raise response.HTTPResponse(status=401)
 
     await Users.filter(id=requested_user_id).update(
         name=name, username=username, password=password, is_active=is_active
@@ -69,13 +68,13 @@ async def delete_user(request, *args, **kwargs):
     user = await Users.filter(id=requested_user_id).first()
 
     if not token_user.is_admin:
-        raise InvalidUsage("User is not admin not eligible to update users!!")
+        raise response.HTTPResponse(status=401)
 
     if user is None:
-        raise InvalidUsage("User not found !!")
+        raise response.HTTPResponse(status=404)
 
     if not user.is_active:
-        raise InvalidUsage("User is already deleted !!")
+        raise response.HTTPResponse(status=404)
 
     await Users.filter(id=requested_user_id).update(is_active=False)
 

@@ -4,7 +4,6 @@ https://fynd-intv.herokuapp.com/
 heroku logs --tail --app fynd-intv
 # To scale heroku instance
 heroku ps:scale web=1 --app fynd-intv
-
 # Deployment link
 https://fynd-intv.herokuapp.com/
 
@@ -23,8 +22,6 @@ https://fynd-intv.herokuapp.com/
    (main application, route setting)
 - requirements.txt
    (Pythonic requierments)
-- DB table stucture
-    (table_stucture.txt)
 ```
 
 Install requirements by:
@@ -104,7 +101,101 @@ Prerequisites:
         file upload
     }
     ```
-* POST `/search_movies_id/<movie_id>` search movie (only for admin role with token authentication).
+* POST `/search_movies?pk=1` search movie with params (only for admin role with token authentication).
+
+    ```response
+    [{'movie_name': 'The Wizard of Oz', 'popularity': 83.0, 'imdbScore': 8.3, 'year_release': '2017', 'genre__genre_name': ['Adventure', ' Family', ' Fantasy', ' Musical'], 'director': 'Victor Fleming'}]
+
+* POST `/search_movies` search movie with arguments (only for admin role with token authentication).
+
+    ```request
+    {
+        "movie_name": "The Wizard of Oz", or
+        "popularity": 9, or
+        "imdbScore": 8.3, or
+        "director": "Victor Fleming"
+    }
+    ```response
+    {
+        "movie_name": "The Wizard of Oz",
+        "popularity": 83.0,
+        "imdbScore": 8.3,
+        "year_release": "2017",
+        "genre_name": [
+            "Adventure",
+            " Family",
+            " Fantasy",
+            " Musical"
+        ],
+        "director": "Victor Fleming"
+    },
+    {
+        "movie_name": "James Bond",
+        "popularity": 9.0,
+        "imdbScore": 9.0,
+        "year_release": "2010",
+        "genre_name": [
+            "Action",
+            " Adventure",
+            " Fantasy",
+            " Sci-Fi",
+            "Action"
+        ],
+        "director": "Ian Filming"
+    },
+    {
+        "movie_name": "Skyfall",
+        "popularity": 9.0,
+        "imdbScore": 9.0,
+        "year_release": "2010",
+        "genre_name": [
+            "Action",
+            " Adventure",
+            " Fantasy",
+            " Sci-Fi",
+            "Action"
+        ],
+        "director": "Ian Filming"
+    }
+
+    OR
+    ```request
+        {
+        "genre": ["Adventure", "Family"]
+    }
+
+    ```response
+    {
+        "response": [
+            {
+                "movie_name": "Star Wars",
+                "popularity": 88.0,
+                "imdbScore": 8.8,
+                "year_release": "2010",
+                "genre_name": [
+                    "Action",
+                    " Adventure",
+                    " Fantasy",
+                    " Sci-Fi"
+                ],
+                "director": "George Lucas"
+            },
+            {
+                "movie_name": "Casablanca",
+                "popularity": 88.0,
+                "imdbScore": 8.8,
+                "year_release": "2017",
+                "genre_name": [
+                    "Drama",
+                    " Romance",
+                    " War"
+                ],
+                "director": "Michael Curtiz"
+            }
+        ]
+    }
+
+
 * POST `/add_movies` addm movies (only for admin role with token authentication).
     ```request
     {

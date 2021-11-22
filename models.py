@@ -19,36 +19,27 @@ class Token(Model):
     token = fields.CharField(255)
 
 
-# class Genre(Model):
+class Genre(Model):
 
-#     id = fields.IntField(pk=True)
-#     genre_name = fields.CharField(50)
+    id = fields.IntField(pk=True)
+    genre_name = fields.CharField(100, blank=False, null=False)
 
-#     def __str__(self):
-#         return self.genre_name
-
-
-# class Director(Model):
-
-#     id = fields.IntField(pk=True)
-#     director_name = fields.CharField(50)
-
-#     def __str__(self):
-#         return self.director_name
+    def __str__(self):
+        return self.genre_name
 
 
 class Movie(Model):
 
     id = fields.IntField(pk=True)
-    movie_name = fields.CharField(255)
+    movie_name = fields.CharField(255, blank=False, null=False)
     popularity = fields.FloatField(max_digits=10, decimal_places=2, null=True)
     imdbScore = fields.FloatField(max_digits=10, decimal_places=2, null=True)
-    genre = fields.TextField()
-    director = fields.TextField()
+    year_release = fields.CharField(10, blank=False, null=False)
+    genre = fields.ManyToManyField('models.Genre')
+    director = fields.CharField(255, blank=False, null=False)
 
     def __str__(self):
         return self.movie_name
 
-
-# genre = fields.ManyToManyField('models.Genre')
-# director = fields.ManyToManyField('models.Director')
+    class Meta:
+        unique_together = ('movie_name', 'year_release', 'director')
