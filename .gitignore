@@ -7,5 +7,5 @@ __pycache__/
 .Python
 .idea/
 media/
-# .env
+.env
 .vscode/

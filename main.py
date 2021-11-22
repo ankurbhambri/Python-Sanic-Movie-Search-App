@@ -51,7 +51,8 @@ app.add_route(update_movies, "/update_movies", methods=["POST"])
 
 register_tortoise(
     app,
-    db_url=env.str('db_url'),
+    # db_url=env.str('db_url'),
+    db_url='postgres://swtmdpae:t9J1pErwWKqKT2oy3bNAsTRFqpMcQDiD@kashin.db.elephantsql.com:5432/swtmdpae',
     modules={"models": ["models"]},
     generate_schemas=True,
 )
