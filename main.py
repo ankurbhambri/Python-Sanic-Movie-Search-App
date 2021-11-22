@@ -1,7 +1,6 @@
 from environs import Env
 from sanic import response
 from sanic_jwt import Initialize
-from sqlalchemy.ext.asyncio import create_async_engine
 from tortoise.contrib.sanic import register_tortoise
 
 from authentication.auth import (
