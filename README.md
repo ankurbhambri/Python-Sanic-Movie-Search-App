@@ -1,13 +1,17 @@
-# Url
+# URL
 https://fynd-intv.herokuapp.com/
+
 # Logs
 heroku logs --tail --app fynd-intv
+
 # To scale heroku instance
 heroku ps:scale web=1 --app fynd-intv
+
 # Deployment link
 https://fynd-intv.herokuapp.com/
 
 **RESTful API that add users and movies**
+
 ### Project Structure & Setup
 
 - Models/ 
@@ -21,7 +25,22 @@ https://fynd-intv.herokuapp.com/
 - main.py
    (main application, route setting)
 - requirements.txt
-   (Pythonic requierments)
+   (Pythonic requirements)
+
+Install requirements by:
+ 
+`pip install -r requirements.txt`
+
+Prerequisites:
+* RUN `run.py` to run server
+
+#### CRUD /users routes
+
+* GET `https://fynd-intv.herokuapp.com/users`
+    
+    ```json
+    [{"id": 1, "name": "amichay"}]
+    ```
 ```
 
 Install requirements by:
@@ -39,14 +58,14 @@ Prerequisites:
     [{'id': 1, "name: 'amichay}]
     ```
 
-#### CURD /auth : Authentication endpoints
+#### CRUD /auth : Authentication endpoints
 
-* login is done by POST to `/auth` with payload that includes username & password. The login endpoint returns JWT access-token (which is short-lived) amd refresh-token used for getting a new access-token.
+* login is done by POST to `/auth` with payload that includes username & password. The login endpoint returns JWT access-token (which is short-lived) and refresh-token used for getting a new access-token.
 * Example response payload:
     
     `{'access_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0OCwiZXhwIjoxNTU5NjQ3MTI1LCJpYXQiOjE1NTk2NDUzMjUsIm5hbWUiOiJBbWljaGF5IE9yZW4iLCJlbWFpbCI6ImFtaWNoYXkub3Jlbis0Mzc4QGdtYWlsLmNvbSIsInNjb3BlcyI6WyJ1c2VyIl19.2arsjawnHlPT0StNxTkyO6kEdDImqgCnFPjVbcRidEs', 'refresh_token': '12a6c653839e03be9cfa56d35eed26931668b174a58bb589'}
     ` 
-* `access_token` should be used in the header for all protected calls as followes:
+* `access_token` should be used in the header for all protected calls as follows:
 
     ```buildoutcfg
      headers = {"Authorization": f"Bearer {access_token}"}
@@ -79,92 +98,98 @@ Prerequisites:
     ```
     ```response
     {
-        "User created successfuly": "User 1: gilu@ggmail.com"
+        "User created successfully": "User 1: gilu@ggmail.com"
     }
-    
     ```
 * POST `/update_user/<user_id>` update user information (only for admin role with token authentication).
-    ```request
+    ```json
     {
         "name": "Test",
-        "email: "Test@test.com"
+        "email": "Test@test.com"
     }
     ```
 * DELETE `/users/<user_id>` deactivate user information (only for admin role with token authentication).
-#### CURD /Movies : Authentication required
+#### CRUD /Movies : Authentication required
 
 * Movies API with authentication and endpoints
 
 * POST `/upload` to upload movies data through file (only for admin role with token authentication)
-    ```request
-    {
-        file upload
-    }
     ```
+    file upload
+    ```
+
 * POST `/search_movies?pk=1` search movie with params (only for admin role with token authentication).
 
-    ```response
-    [{'movie_name': 'The Wizard of Oz', 'popularity': 83.0, 'imdbScore': 8.3, 'year_release': '2017', 'genre__genre_name': ['Adventure', ' Family', ' Fantasy', ' Musical'], 'director': 'Victor Fleming'}]
+    ```json
+    [{"movie_name": "The Wizard of Oz", "popularity": 83.0, "imdbScore": 8.3, "year_release": "2017", "genre__genre_name": ["Adventure", " Family", " Fantasy", " Musical"], "director": "Victor Fleming"}]
+    ```
 
 * POST `/search_movies` search movie with arguments (only for admin role with token authentication).
 
-    ```request
-    {
-        "movie_name": "The Wizard of Oz", or
-        "popularity": 9, or
-        "imdbScore": 8.3, or
-        "director": "Victor Fleming"
-    }
-    ```response
+    ```json
     {
         "movie_name": "The Wizard of Oz",
-        "popularity": 83.0,
+        "popularity": 9,
         "imdbScore": 8.3,
-        "year_release": "2017",
-        "genre_name": [
-            "Adventure",
-            " Family",
-            " Fantasy",
-            " Musical"
-        ],
         "director": "Victor Fleming"
-    },
-    {
-        "movie_name": "James Bond",
-        "popularity": 9.0,
-        "imdbScore": 9.0,
-        "year_release": "2010",
-        "genre_name": [
-            "Action",
-            " Adventure",
-            " Fantasy",
-            " Sci-Fi",
-            "Action"
-        ],
-        "director": "Ian Filming"
-    },
-    {
-        "movie_name": "Skyfall",
-        "popularity": 9.0,
-        "imdbScore": 9.0,
-        "year_release": "2010",
-        "genre_name": [
-            "Action",
-            " Adventure",
-            " Fantasy",
-            " Sci-Fi",
-            "Action"
-        ],
-        "director": "Ian Filming"
     }
+    ```
+    
+    ```json
+    [
+        {
+            "movie_name": "The Wizard of Oz",
+            "popularity": 83.0,
+            "imdbScore": 8.3,
+            "year_release": "2017",
+            "genre_name": [
+                "Adventure",
+                " Family",
+                " Fantasy",
+                " Musical"
+            ],
+            "director": "Victor Fleming"
+        },
+        {
+            "movie_name": "James Bond",
+            "popularity": 9.0,
+            "imdbScore": 9.0,
+            "year_release": "2010",
+            "genre_name": [
+                "Action",
+                " Adventure",
+                " Fantasy",
+                " Sci-Fi",
+                "Action"
+            ],
+            "director": "Ian Filming"
+        },
+        {
+            "movie_name": "Skyfall",
+            "popularity": 9.0,
+            "imdbScore": 9.0,
+            "year_release": "2010",
+            "genre_name": [
+                "Action",
+                " Adventure",
+                " Fantasy",
+                " Sci-Fi",
+                "Action"
+            ],
+            "director": "Ian Filming"
+        }
+    ]
+    ```
 
     OR
-    ```request
-        {
+
+    ```json
+    {
         "genre": ["Adventure", "Family"]
     }
+    ```
 
-    ```response
+    ```json
     {
         "response": [
             {
@@ -194,10 +219,10 @@ Prerequisites:
             }
         ]
     }
+    ```
 
-
-* POST `/add_movies` addm movies (only for admin role with token authentication).
-    ```request
+* POST `/add_movies` add movies (only for admin role with token authentication).
+    ```json
     {
         "movie_name": "Test movie",
         "popularity": 9,
@@ -205,8 +230,10 @@ Prerequisites:
         "genre": ["Action"],
         "director": "Test"
     }
+    ```
+
 * POST `/update_movies` update movies (only for admin role with token authentication).
-    ```request
+    ```json
     {
         "id": 109,
         "movie_name": "Test movie changed",
@@ -215,9 +242,9 @@ Prerequisites:
         "genre": ["Action"],
         "director": "Test"
     }
+    ```
 
-#### Database Login Creds
+#### Test Database Login Creds
 
 * email nadivo1208@elastit.com
 * pass Redmi@007
-
