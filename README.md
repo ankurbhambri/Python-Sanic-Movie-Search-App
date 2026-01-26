@@ -41,14 +41,6 @@ Prerequisites:
     ```json
     [{"id": 1, "name": "amichay"}]
     ```
-```
-
-Install requirements by:
- 
-`pip install -r requirements.txt`
-
-Prerequisites:
-* RUN `run.py` to run server
 
 #### CURD /users routes
     ```
@@ -244,7 +236,7 @@ Prerequisites:
     }
     ```
 
-#### Test Database Login Creds
+#### Database Login Creds
 
 * email nadivo1208@elastit.com
 * pass Redmi@007
